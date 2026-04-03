@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMGPS - Inscrições Trail & MTB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-option.selected { border-color: #f97316; background-color: #7c2d12; color: white; }
+        .tamanho-btn.selected { background-color: #f97316; border-color: #f97316; color: white; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+
+    <!-- Header -->
+    <header class="p-4 bg-slate-950 border-b border-orange-500/30 flex justify-between items-center sticky top-0 z-50">
+        <h1 class="text-2xl font-black italic">SMGPS<span class="text-orange-500">.MZ</span></h1>
+        <a href="https://wa.me/258843692259" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+            <i class="fab fa-whatsapp"></i> Suporte
+        </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[50vh] flex items-center justify-center text-center p-6 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800')] bg-cover bg-center"></div>
+        <div class="z-10">
+            <h2 class="text-4xl md:text-6xl font-black mb-2 bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent">SUPERE SEUS LIMITES</h2>
+            <p class="text-slate-400 max-w-lg mx-auto text-lg">Experiências de Trail Running e MTB em conexão com a natureza de Moçambique.</p>
+        </div>
+    </section>
+
+    <!-- Sobre a Prova -->
+    <section class="max-w-2xl mx-auto p-6">
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+            <h3 class="text-xl font-bold text-orange-500 mb-4"><i class="fas fa-info-circle mr-2"></i>Sobre a Prova</h3>
+            <p class="text-slate-300 mb-4">A SMGPS (Samuel Mussagy Global Positioning System) traz eventos esportivos únicos nas montanhas de Moçambique. Desafie seus limites em trilhas espetaculares.</p>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="bg-slate-700 p-3 rounded-lg text-center">
+                    <p class="text-2xl font-black text-green-500">500+</p>
+                    <p class="text-xs text-slate-400">Atletas</p>
+                </div>
+                <div class="bg-slate-700 p-3 rounded-lg text-center">
+                    <p class="text-2xl font-black text-orange-500">3</p>
+                    <p class="text-xs text-slate-400">Modalidades</p>
+                </div>
+            </div>
+            <div class="rounded-lg overflow-hidden border border-slate-600">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3586.123456789!2d32.42!3d-25.96!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDU3JzQ2LjQiTiAzMsKwMjQnMDAuMCJF!5e1!3m2!1spt-BR!2smz!4v1" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <p class="text-sm text-slate-400 mt-3 text-center"><i class="fas fa-map-marker-alt text-orange-500 mr-1"></i> Acomodação dos Pequenos Libombos, Moçambique</p>
+        </div>
+    </section>
+
+    <!-- Formulário -->
+    <main class="max-w-2xl mx-auto p-6 pb-20">
+        <form id="regForm" class="bg-slate-800 p-6 rounded-2xl shadow-2xl border border-slate-700">
+            <!-- Progress Bar -->
+            <div class="flex justify-between mb-6">
+                <div class="h-2 w-full bg-slate-700 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-orange-500 to-green-500 transition-all duration-500" style="width: 33%"></div>
+                </div>
+            </div>
+
+            <!-- PASSO 1: Modalidade + Distância -->
+            <div class="step active" id="step1">
+                <h3 class="text-xl font-bold mb-1">1. Escolha sua Aventura</h3>
+                <p class="text-slate-400 text-sm mb-4">Selecione a modalidade e distância</p>
+                
+                <div class="grid grid-cols-1 gap-3 mb-6">
+                    <button type="button" onclick="selectMod('Trail Running')" class="btn-option p-4 rounded-xl border-2 border-slate-600 hover:border-orange-500 text-left flex justify-between items-center transition-all">
+                        <span class="flex items-center"><i class="fas fa-running mr-3 text-orange-500"></i> Trail Running</span>
+                        <i class="fas fa-chevron-right text-slate-500"></i>
+                    </button>
+                    <button type="button" onclick="selectMod('MTB Race')" class="btn-option p-4 rounded-xl border-2 border-slate-600 hover:border-orange-500 text-left flex justify-between items-center transition-all">
+                        <span class="flex items-center"><i class="fas fa-bicycle mr-3 text-green-500"></i> MTB Race</span>
+                        <i class="fas fa-chevron-right text-slate-500"></i>
+                    </button>
+                    <button type="button" onclick="selectMod('XCO MTB')" class="btn-option p-4 rounded-xl border-2 border-slate-600 hover:border-orange-500 text-left flex justify-between items-center transition-all">
+                        <span class="flex items-center"><i class="fas fa-mountain mr-3 text-orange-500"></i> XCO MTB</span>
+                        <i class="fas fa-chevron-right text-slate-500"></i>
+                    </button>
+                </div>
+                
+                <div id="distanciaArea" class="hidden mb-4">
+                    <p class="text-sm text-slate-400 mb-2">Selecione a distância:</p>
+                    <div id="distanciaOptions" class="grid grid-cols-2 gap-3"></div>
+                </div>
+                
+                <input type="hidden" name="modalidade" id="modalidade_input">
+                <input type="hidden" name="distancia" id="distancia_input">
+            </div>
+
+            <!-- PASSO 2: Camiseta + Dados Pessoais -->
+            <div class="step" id="step2">
+                <h3 class="text-xl font-bold mb-1">2. Kit do Atleta</h3>
+                <p class="text-slate-400 text-sm mb-4">Camiseta oficial (+500 MT) e seus dados</p>
+                
+                <div class="bg-slate-700 p-4 rounded-xl mb-4">
+                    <p class="mb-3">Deseja a camisete oficial do evento?</p>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="setCamiseta(true, this)" class="camiseta-btn flex-1 p-3 rounded-lg border-2 border-slate-500 hover:border-orange-500 font-bold">Sim (+500 MT)</button>
+                        <button type="button" onclick="setCamiseta(false, this)" class="camiseta-btn flex-1 p-3 rounded-lg border-2 border-slate-500 hover:border-orange-500 font-bold">Não</button>
+                    </div>
+                </div>
+                
+                <div id="tamanhoArea" class="hidden mb-4">
+                    <label class="text-sm text-slate-400">Selecione o tamanho:</label>
+                    <div class="grid grid-cols-4 gap-2 mt-2">
+                        <button type="button" onclick="setTamanho('P', this)" class="tamanho-btn p-3 rounded-lg border-2 border-slate-600 hover:border-orange-500 font-bold">P</button>
+                        <button type="button" onclick="setTamanho('M', this)" class="tamanho-btn p-3 rounded-lg border-2 border-slate-600 hover:border-orange-500 font-bold">M</button>
+                        <button type="button" onclick="setTamanho('G', this)" class="tamanho-btn p-3 rounded-lg border-2 border-slate-600 hover:border-orange-500 font-bold">G</button>
+                        <button type="button" onclick="setTamanho('GG', this)" class="tamanho-btn p-3 rounded-lg border-2 border-slate-600 hover:border-orange-500 font-bold">GG</button>
+                    </div>
+                    <input type="hidden" name="tamanho" id="tamanho_input">
+                </div>
+                
+                <div class="space-y-3">
+                    <input type="text" name="nome" id="nome" placeholder="Nome Completo" class="w-full p-4 rounded-xl bg-slate-700 border border-slate-600 focus:border-orange-500 outline-none" required>
+                    <input type="tel" name="telefone" id="telefone" placeholder="Telefone (M-Pesa)" class="w-full p-4 rounded-xl bg-slate-700 border border-slate-600 focus:border-orange-500 outline-none" required>
+                    <input type="text" name="emergencia_nome" id="emergencia_nome" placeholder="Nome do Contato de Emergência" class="w-full p-4 rounded-xl bg-slate-700 border border-slate-600 focus:border-orange-500 outline-none" required>
+                    <input type="tel" name="emergencia_tel" id="emergencia_tel" placeholder="Telefone de Emergência" class="w-full p-4 rounded-xl bg-slate-700 border border-slate-600 focus:border-orange-500 outline-none" required>
+                </div>
+                
+                <input type="hidden" name="quer_camiseta" id="camiseta_input">
+                
+                <div class="flex gap-3 mt-6">
+                    <button type="button" onclick="prevStep()" class="flex-1 bg-slate-600 hover:bg-slate-500 py-3 rounded-lg font-bold"><i class="fas fa-arrow-left mr-2"></i>Voltar</button>
+                    <button type="button" onclick="nextStep()" class="flex-1 bg-orange-500 hover:bg-orange-600 py-3 rounded-lg font-bold">Avançar <i class="fas fa-arrow-right ml-2"></i></button>
+                </div>
+            </div>
+
+            <!-- PASSO 3: Pagamento -->
+            <div class="step" id="step3">
+                <h3 class="text-xl font-bold mb-1">3. Pagamento</h3>
+                <p class="text-slate-400 text-sm mb-4">Confirme e envie o comprovante</p>
+                
+                <div class="text-center mb-6">
+                    <p class="text-slate-400">Total a pagar:</p>
+                    <h4 id="displayTotal" class="text-5xl font-black text-orange-500">0 MT</h4>
+                </div>
+                
+                <div class="bg-slate-700 p-5 rounded-xl mb-6">
+                    <p class="text-sm text-slate-400 mb-1 text-center">Pagamento via M-Pesa</p>
+                    <p class="text-3xl font-bold text-center text-green-500">843692259</p>
+                    <p class="text-xs text-center text-slate-500 italic mb-4">Samuel Mussagy</p>
+                    <button type="button" onclick="copyNumber()" class="w-full bg-slate-600 hover:bg-slate-500 py-3 rounded-lg font-bold flex items-center justify-center gap-2">
+                        <i class="fas fa-copy"></i> Copiar Número
+                    </button>
+                </div>
+                
+                <button type="button" onclick="sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 py-4 rounded-xl font-black text-lg flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fab fa-whatsapp text-2xl"></i> ENVIAR COMPROVANTE VIA WHATSAPP
+                </button>
+                <p class="text-xs text-slate-500 text-center mt-3 uppercase tracking-widest">Os dados serão enviados para o organizador</p>
+                
+                <button type="button" onclick="prevStep()" class="mt-4 text-slate-400 font-bold block w-full text-center"><i class="fas fa-arrow-left mr-2"></i>Voltar</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        let total = 0;
+        const data = { modalidade: '', distancia: '', precoBase: 0, camiseta: false, tamanho: '' };
+
+        const precos = {
+            'Trail Running': { '24km': 1250, '12km': 1000, '5km': 850 },
+            'MTB Race': { '30km': 1500, '15km': 1200 },
+            'XCO MTB': { '20km': 1400, '10km': 1100 }
+        };
+
+        function updateProgress() {
+            let percent = (currentStep / 3) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+
+        function nextStep() {
+            if (!validateStep()) return;
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+
+        function prevStep() {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep--;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+
+        function validateStep() {
+            if (currentStep === 1 && (!data.modalidade || !data.distancia)) {
+                alert('Selecione a modalidade e distância!');
+                return false;
+            }
+            if (currentStep === 2) {
+                const nome = document.getElementById('nome').value.trim();
+                const telefone = document.getElementById('telefone').value.trim();
+                const emergNome = document.getElementById('emergencia_nome').value.trim();
+                const emergTel = document.getElementById('emergencia_tel').value.trim();
+                if (!nome || !telefone || !emergNome || !emergTel) {
+                    alert('Preencha todos os campos pessoais!');
+                    return false;
+                }
+                if (data.camiseta === true && !data.tamanho) {
+                    alert('Selecione o tamanho da camiseta!');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function selectMod(mod) {
+            data.modalidade = mod;
+            document.getElementById('modalidade_input').value = mod;
+            
+            const distDiv = document.getElementById('distanciaOptions');
+            distDiv.innerHTML = '';
+            
+            Object.entries(precos[mod]).forEach(([dist, preco]) => {
+                distDiv.innerHTML += `
+                    <button type="button" onclick="selectDist('${dist}', ${preco})" class="p-3 rounded-lg border-2 border-slate-600 hover:border-orange-500 font-bold text-center transition-all">
+                        <span class="block text-lg">${dist}</span>
+                        <span class="text-green-500 font-black">${preco} MT</span>
+                    </button>`;
+            });
+            
+            document.getElementById('distanciaArea').classList.remove('hidden');
+        }
+
+        function selectDist(dist, preco) {
+            data.distancia = dist;
+            data.precoBase = preco;
+            document.getElementById('distancia_input').value = dist;
+            total = preco;
+            document.getElementById('displayTotal').innerText = total + " MT";
+            nextStep();
+        }
+
+        function setCamiseta(val, btnElement) {
+            data.camiseta = val;
+            document.getElementById('camiseta_input').value = val ? 'Sim' : 'Não';
+            
+            // Atualizar visual dos botões
+            document.querySelectorAll('.camiseta-btn').forEach(btn => {
+                btn.classList.remove('selected', 'bg-orange-500', 'border-orange-500');
+            });
+            if (val) {
+                btnElement.classList.add('selected', 'bg-orange-500', 'border-orange-500');
+                document.getElementById('tamanhoArea').classList.remove('hidden');
+            } else {
+                document.getElementById('tamanhoArea').classList.add('hidden');
+                data.tamanho = '';
+                document.getElementById('tamanho_input').value = '';
+                document.querySelectorAll('.tamanho-btn').forEach(btn => {
+                    btn.classList.remove('selected', 'bg-orange-500', 'border-orange-500');
+                });
+            }
+            
+            // Recalcular total
+            if (data.precoBase > 0) {
+                total = data.precoBase + (val ? 500 : 0);
+                document.getElementById('displayTotal').innerText = total + " MT";
+            }
+        }
+
+        function setTamanho(tam, btnElement) {
+            data.tamanho = tam;
+            document.getElementById('tamanho_input').value = tam;
+            document.querySelectorAll('.tamanho-btn').forEach(btn => {
+                btn.classList.remove('selected', 'bg-orange-500', 'border-orange-500');
+            });
+            btnElement.classList.add('selected', 'bg-orange-500', 'border-orange-500');
+        }
+
+        function copyNumber() {
+            navigator.clipboard.writeText('843692259');
+            alert('Número copiado! Agora faça o pagamento via M-Pesa.');
+        }
+
+        function sendToWhatsApp() {
+            const nome = document.getElementById('nome').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const emergNome = document.getElementById('emergencia_nome').value.trim();
+            const emergTel = document.getElementById('emergencia_tel').value.trim();
+            const tamanho = data.camiseta ? `Tamanho ${data.tamanho}` : 'Sem camiseta';
+            
+            const msg = `🏃 *Nova Inscrição - SMGPS*\n\n` +
+                `👤 *Atleta:* ${nome}\n` +
+                `📱 *Telefone:* ${telefone}\n` +
+                `🏅 *Modalidade:* ${data.modalidade}\n` +
+                `📏 *Distância:* ${data.distancia}\n` +
+                `👕 *Kit:* ${tamanho}\n` +
+                `💰 *Total:* ${total} MT\n\n` +
+                `⚠️ *Emergência:* ${emergNome} (${emergTel})\n\n` +
+                `*Segue comprovante de pagamento:*`;
+            
+            const waUrl = `https://wa.me/258843692259?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
